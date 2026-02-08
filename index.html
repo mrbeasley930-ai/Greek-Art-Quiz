@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCR Greek Art — Architectural Sculpture Essay Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --parchment: #f5f0e8;
+  --cream: #faf8f3;
+  --terracotta: #c45a3c;
+  --terracotta-light: #e8734f;
+  --aegean: #2d6a8f;
+  --aegean-dark: #1e4a66;
+  --aegean-light: #3d8ab8;
+  --gold: #c9a84c;
+  --gold-light: #e6c96e;
+  --olive: #5a7247;
+  --olive-light: #7a9a60;
+  --marble: #e8e2d6;
+  --shadow: rgba(26, 26, 46, 0.08);
+  --shadow-md: rgba(26, 26, 46, 0.12);
+  --correct: #3a7d44;
+  --correct-bg: #e8f5e9;
+  --incorrect: #c62828;
+  --incorrect-bg: #fce4e4;
+  --partial-bg: #fff8e1;
+  --ao1: #2d6a8f;
+  --ao2: #7b2d8e;
+  --examiner: #c45a3c;
+  --scholar: #5a7247;
+  --remedial-bg: #f3e8f9;
+  --remedial-border: #9b59b6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--parchment);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.greek-key {
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--terracotta) 0px, var(--terracotta) 8px, transparent 8px, transparent 12px, var(--terracotta) 12px, var(--terracotta) 14px, transparent 14px, transparent 18px);
+  opacity: 0.6;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a2a4e 50%, var(--aegean-dark) 100%);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.header-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.header-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--cream);
+  margin-bottom: 1rem;
+  max-width: 750px;
+}
+
+.header h1 em { color: var(--gold-light); font-style: italic; }
+
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(245, 240, 232, 0.7);
+}
+
+.header-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+.meta-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.meta-dot.ao1 { background: var(--aegean-light); }
+.meta-dot.ao2 { background: #a855f7; }
+
+.main { max-width: 900px; margin: 0 auto; padding: 1.5rem 2rem 4rem; }
+
+.progress-container {
+  background: var(--marble);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(26, 26, 46, 0.06);
+}
+
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+
+.progress-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--aegean);
+}
+
+.progress-score { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); }
+
+.progress-bar-track { height: 8px; background: rgba(26, 26, 46, 0.08); border-radius: 4px; overflow: hidden; }
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--aegean), var(--aegean-light));
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0%;
+}
+
+.section-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+
+.section-pill {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.05);
+  color: var(--ink);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.section-pill.active { background: var(--aegean); color: white; opacity: 1; }
+.section-pill.completed { background: var(--correct); color: white; opacity: 0.85; }
+
+.section { display: none; animation: fadeIn 0.4s ease; }
+.section.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-header { margin-bottom: 1.75rem; }
+
+.section-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.3rem;
+}
+
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+.section-desc { font-size: 0.88rem; color: rgba(26, 26, 46, 0.65); max-width: 650px; }
+
+.tag {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 1px;
+  text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 3px; font-weight: 500;
+}
+
+.tag.ao1 { background: rgba(45, 106, 143, 0.12); color: var(--ao1); }
+.tag.ao2 { background: rgba(123, 45, 142, 0.12); color: var(--ao2); }
+.tag.examiner { background: rgba(196, 90, 60, 0.12); color: var(--examiner); }
+.tag.scholar { background: rgba(90, 114, 71, 0.12); color: var(--scholar); }
+
+.question-card {
+  background: var(--cream);
+  border: 1px solid rgba(26, 26, 46, 0.08);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s;
+}
+
+.q-number { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: rgba(26, 26, 46, 0.4); letter-spacing: 1px; margin-bottom: 0.5rem; }
+.q-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.65rem; }
+
+.q-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; line-height: 1.45;
+  color: var(--ink); margin-bottom: 1rem;
+}
+
+.options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.option-btn {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.85rem 1rem; background: white;
+  border: 1.5px solid rgba(26, 26, 46, 0.12); border-radius: 8px;
+  cursor: pointer; text-align: left;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem;
+  line-height: 1.5; color: var(--ink); transition: all 0.2s;
+}
+
+.option-btn:hover:not(.disabled) { border-color: var(--aegean); background: rgba(45, 106, 143, 0.04); transform: translateX(3px); }
+
+.option-letter {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(26, 26, 46, 0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+  font-weight: 500; margin-top: 1px; transition: all 0.2s;
+}
+
+.option-btn.selected .option-letter { background: var(--aegean); color: white; }
+.option-btn.correct-answer { border-color: var(--correct); background: var(--correct-bg); }
+.option-btn.correct-answer .option-letter { background: var(--correct); color: white; }
+.option-btn.wrong-answer { border-color: var(--incorrect); background: var(--incorrect-bg); opacity: 0.7; }
+.option-btn.wrong-answer .option-letter { background: var(--incorrect); color: white; }
+.option-btn.disabled { cursor: default; pointer-events: none; }
+
+.checkbox-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+
+.checkbox-btn {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.75rem 1rem; background: white;
+  border: 1.5px solid rgba(26, 26, 46, 0.12); border-radius: 8px;
+  cursor: pointer; text-align: left;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem;
+  line-height: 1.5; color: var(--ink); transition: all 0.2s;
+}
+
+.checkbox-btn:hover:not(.disabled) { border-color: var(--aegean); background: rgba(45, 106, 143, 0.04); }
+.checkbox-btn.selected { border-color: var(--aegean); background: rgba(45, 106, 143, 0.06); }
+.checkbox-btn.disabled { cursor: default; pointer-events: none; }
+.checkbox-btn.reveal-correct { border-color: var(--correct); background: var(--correct-bg); }
+.checkbox-btn.reveal-wrong { border-color: var(--incorrect); background: var(--incorrect-bg); opacity: 0.65; }
+
+.check-box {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 4px;
+  border: 2px solid rgba(26, 26, 46, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; margin-top: 2px; transition: all 0.2s;
+}
+
+.checkbox-btn.selected .check-box { background: var(--aegean); border-color: var(--aegean); }
+.checkbox-btn.selected .check-box::after { content: '✓'; color: white; font-weight: 700; }
+
+.submit-multi-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1.5rem; background: var(--aegean); color: white;
+  border: none; border-radius: 6px;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem;
+  font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+
+.submit-multi-btn:hover { background: var(--aegean-dark); }
+
+.feedback-block { margin-top: 1rem; display: none; animation: fadeIn 0.3s ease; }
+.feedback-block.show { display: block; }
+
+.feedback-correct-box {
+  padding: 1rem 1.25rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.6;
+  background: var(--correct-bg); border-left: 3px solid var(--correct); margin-bottom: 0.5rem;
+}
+
+.feedback-incorrect-box {
+  padding: 1rem 1.25rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.6;
+  background: var(--incorrect-bg); border-left: 3px solid var(--incorrect); margin-bottom: 0.5rem;
+}
+
+.feedback-partial-box {
+  padding: 1rem 1.25rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.6;
+  background: var(--partial-bg); border-left: 3px solid var(--gold); margin-bottom: 0.5rem;
+}
+
+.feedback-title { font-weight: 700; margin-bottom: 0.3rem; font-size: 0.88rem; }
+.feedback-title.correct-title { color: var(--correct); }
+.feedback-title.incorrect-title { color: var(--incorrect); }
+.feedback-title.partial-title { color: #b8860b; }
+
+.remedial-box {
+  margin-top: 0.75rem; padding: 1.1rem 1.35rem; border-radius: 8px;
+  background: linear-gradient(135deg, #f8f0fb 0%, #f0e6f6 100%);
+  border: 1px solid rgba(155, 89, 182, 0.2);
+  border-left: 4px solid var(--remedial-border);
+  font-size: 0.85rem; line-height: 1.7;
+}
+
+.remedial-header {
+  display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--remedial-border); font-weight: 600;
+}
+
+.remedial-header::before { content: '📖'; font-size: 0.85rem; }
+.remedial-box p { margin-bottom: 0.6rem; }
+.remedial-box p:last-child { margin-bottom: 0; }
+.remedial-box strong { color: var(--ink); }
+
+.remedial-box .key-point {
+  display: block; background: rgba(255,255,255,0.6); border-radius: 5px;
+  padding: 0.5rem 0.75rem; margin: 0.5rem 0;
+  border-left: 3px solid var(--aegean); font-size: 0.83rem;
+}
+
+.remedial-box .scholar-ref {
+  display: block; background: rgba(90, 114, 71, 0.08); border-radius: 5px;
+  padding: 0.5rem 0.75rem; margin: 0.5rem 0;
+  border-left: 3px solid var(--scholar); font-size: 0.83rem;
+}
+
+.remedial-box .exam-tip {
+  display: block; background: rgba(196, 90, 60, 0.08); border-radius: 5px;
+  padding: 0.5rem 0.75rem; margin: 0.5rem 0;
+  border-left: 3px solid var(--examiner); font-size: 0.83rem;
+}
+
+.nav-buttons {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 2rem; padding-top: 1.5rem;
+  border-top: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.nav-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.5rem; border-radius: 8px;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem;
+  font-weight: 600; cursor: pointer; transition: all 0.2s; border: 2px solid;
+}
+
+.nav-btn.prev { background: transparent; border-color: rgba(26, 26, 46, 0.15); color: var(--ink); }
+.nav-btn.prev:hover { border-color: var(--ink); }
+.nav-btn.next { background: var(--terracotta); border-color: var(--terracotta); color: white; }
+.nav-btn.next:hover { background: var(--terracotta-light); border-color: var(--terracotta-light); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+.results-screen { display: none; text-align: center; padding: 2rem 0; }
+.results-screen.active { display: block; }
+
+.results-score-ring { width: 160px; height: 160px; margin: 0 auto 1.5rem; position: relative; }
+.results-score-ring svg { transform: rotate(-90deg); }
+
+.results-score-ring .score-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: var(--ink);
+}
+
+.results-score-ring .score-label {
+  position: absolute; top: 62%; left: 50%; transform: translate(-50%, 0);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(26, 26, 46, 0.5);
+}
+
+.results-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+
+.results-subtitle {
+  font-size: 0.92rem; color: rgba(26, 26, 46, 0.6); margin-bottom: 2rem;
+  max-width: 500px; margin-left: auto; margin-right: auto;
+}
+
+.section-results { display: flex; flex-direction: column; gap: 0.75rem; max-width: 500px; margin: 0 auto 2rem; text-align: left; }
+
+.section-result-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6rem 1rem; background: var(--cream); border-radius: 8px;
+  border: 1px solid rgba(26, 26, 46, 0.06);
+}
+
+.section-result-name { font-size: 0.85rem; font-weight: 500; }
+
+.section-result-score {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: var(--aegean);
+}
+
+.reset-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 2rem; background: var(--ink); color: var(--cream);
+  border: none; border-radius: 8px;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem;
+  font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+
+.reset-btn:hover { background: var(--aegean-dark); }
+
+@media (max-width: 640px) {
+  .header-content { padding: 1.5rem 1.25rem; }
+  .main { padding: 1rem 1.25rem 3rem; }
+  .question-card { padding: 1.25rem; }
+  .header h1 { font-size: 1.3rem; }
+  .section-title { font-size: 1.3rem; }
+  .nav-buttons { flex-direction: column; gap: 0.75rem; }
+  .nav-btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="greek-key"></div>
+  <div class="header-content">
+    <div class="header-label">OCR H408/24 · 30-Mark Essay Planner</div>
+    <h1>'Greek architectural sculpture became less imaginative as it became more technically accomplished.' <em>Assess how far you agree with this statement.</em></h1>
+    <div class="header-meta">
+      <span><span class="meta-dot ao1"></span> AO1: 10 marks — Knowledge &amp; Understanding</span>
+      <span><span class="meta-dot ao2"></span> AO2: 20 marks — Analysis &amp; Evaluation</span>
+    </div>
+  </div>
+  <div class="greek-key"></div>
+</div>
+
+<div class="main">
+  <div class="progress-container">
+    <div class="progress-header">
+      <span class="progress-label">Quiz Progress</span>
+      <span class="progress-score" id="scoreDisplay">0 / 0</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <div class="section-pills" id="sectionPills"></div>
+  </div>
+
+  <div id="quizContainer"></div>
+
+  <div class="results-screen" id="resultsScreen">
+    <div class="results-score-ring">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(26,26,46,0.08)" stroke-width="8"/>
+        <circle id="scoreCircle" cx="80" cy="80" r="70" fill="none" stroke="var(--aegean)" stroke-width="8" stroke-dasharray="440" stroke-dashoffset="440" stroke-linecap="round" style="transition: stroke-dashoffset 1.5s cubic-bezier(0.22,1,0.36,1)"/>
+      </svg>
+      <div class="score-text" id="finalScoreText">0%</div>
+      <div class="score-label">correct</div>
+    </div>
+    <div class="results-title" id="resultsTitle"></div>
+    <div class="results-subtitle" id="resultsSubtitle"></div>
+    <div class="section-results" id="sectionResults"></div>
+    <button class="reset-btn" onclick="resetQuiz()">↻ Try Again</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_DATA = [
+  // ===== SECTION 1: DEFINING THE TERMS ===== correct: D, A, C
+  {
+    section: "Defining the Key Terms",
+    sectionDesc: "The examiner reports consistently note that the best responses 'tackle the terms of the question head-on'. Before you can argue, you must define what 'imaginative' and 'technically accomplished' mean.",
+    questions: [
+      {
+        type: "multi",
+        tags: ["ao2"],
+        text: "Which of the following could legitimately be used to define 'imaginative' in the context of architectural sculpture? Select ALL that apply.",
+        options: [
+          "Inventive use of the available space (pediment, metope, frieze)",
+          "Using the most naturalistic style possible",
+          "Creative choices in subject matter and how myths are depicted",
+          "Bold compositional decisions (e.g. scale, asymmetry, contrast)",
+          "The use of expensive materials like Parian marble",
+          "Unexpected emotional range or narrative complexity"
+        ],
+        correct: [0, 2, 3, 5],
+        feedbackCorrect: "Well done — you've correctly distinguished imagination (creative conception and design choices) from technical skill (materials and execution). This distinction is the heart of the essay.",
+        feedbackWrong: "Not quite — you need to distinguish imagination from technical skill.",
+        remedial: `<p>This distinction is <strong>fundamental to the entire essay</strong>. 'Imaginative' refers to the <em>creative thinking behind the work</em> — the ideas, not the execution:</p>
+<span class="key-point"><strong>Imaginative</strong> = inventive use of space, creative subject choices, bold compositional decisions, unexpected emotional range. It's about what the sculptor <em>conceived</em>.</span>
+<span class="key-point"><strong>Technically accomplished</strong> = naturalistic carving, fine anatomical detail, sophisticated drapery, skilled use of marble. It's about how well the sculptor <em>executed</em> the conception.</span>
+<p>'Using the most naturalistic style possible' and 'expensive materials' are about technique and resources, not imagination. A sculptor could produce a brilliantly naturalistic figure of a warrior but make an unimaginative compositional choice — or produce a technically crude but startlingly original design.</p>
+<span class="scholar-ref"><strong>Boardman</strong> distinguishes between the 'bold' design of early works like the Corcyra pediment and their technical limitations, suggesting these are separate categories of achievement.</span>
+<span class="exam-tip"><strong>Examiner tip:</strong> The 2022 report praised candidates who treated the two key terms in a question separately. Define your terms in your introduction — it shows the examiner you understand the question.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "The 2022 examiner report praised candidates who treated the two key terms in their question separately. Applied to this essay, what would be the most sophisticated approach?",
+        options: [
+          "Focus primarily on technical accomplishment since it is easier to evidence with specific visual detail from the prescribed sources",
+          "Treat 'imaginative' and 'technically accomplished' as synonyms, since great technique requires creative thinking and they cannot be separated",
+          "Argue that imagination and technical skill always improve together in a straightforward linear progression from the 6th to 5th century",
+          "Argue that imagination and technical accomplishment can be assessed independently, and may not correlate — a work can be highly imaginative but technically crude, or vice versa"
+        ],
+        correct: 3,
+        feedbackCorrect: "Exactly — treating the terms independently is the hallmark of a Level 5 approach. You can then argue they sometimes advance together (Olympia), sometimes diverge (Bassae), and sometimes the relationship is complex (Parthenon).",
+        feedbackWrong: "This is a key analytical skill — let's make sure you understand it.",
+        remedial: `<p>The 2022 examiner report for Q6 explicitly noted that <strong>'a more sophisticated approach might deal with [the two terms] separately and come to different conclusions about the two different aspects.'</strong> This is directly transferable to your essay.</p>
+<p>Why does this matter? Because the essay question <em>assumes</em> a simple inverse relationship (more technique = less imagination). A strong response challenges this assumption:</p>
+<span class="key-point"><strong>Example:</strong> You might argue the Olympia metopes are <em>both</em> technically accomplished AND highly imaginative (the ageing Herakles, the X-composition of the Cretan Bull, the tender Hesperides scene). This disproves a simple trade-off.</span>
+<span class="key-point"><strong>Example:</strong> You might argue the Parthenon frieze is the <em>most</em> technically accomplished AND the <em>most</em> imaginative (unprecedented civic subject matter) — again disproving the statement.</span>
+<span class="scholar-ref"><strong>Spivey</strong> would support this approach: he argues that technical virtuosity and creative ambition are separate categories of achievement that can be present simultaneously.</span>
+<span class="exam-tip"><strong>Exam technique:</strong> Avoid treating any essay question as a binary agree/disagree. Level 5 responses find nuance and complexity. The 2024 mark scheme rewards 'convincing conclusions' that emerge from weighing multiple perspectives.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2", "examiner"],
+        text: "What does 'technically accomplished' most usefully mean in this context?",
+        options: [
+          "Having the largest possible number of figures crammed into the available architectural space, demonstrating the ambition and resources of the commissioning city-state through sheer scale of production",
+          "Being created by a named, identifiable sculptor whose workshop and training are known to us from ancient literary sources",
+          "Skill in carving naturalistic anatomy, drapery, composition, and effective use of the architectural space",
+          "Made from the most expensive material available, particularly imported Parian marble rather than local limestone"
+        ],
+        correct: 2,
+        feedbackCorrect: "Good — technical accomplishment encompasses the full range of sculptural skills: anatomy, drapery, spatial composition, and effective use of the architectural format.",
+        feedbackWrong: "Let's clarify what counts as 'technical accomplishment' in sculpture.",
+        remedial: `<p>Technical accomplishment in architectural sculpture is about <strong>the sculptor's skill</strong> across multiple dimensions:</p>
+<span class="key-point"><strong>Anatomy:</strong> From the flat, patterned bodies at Corcyra (c.580 BC) to the rippling musculature of the Parthenon Centaur in Metope XXVII (c.445 BC).</span>
+<span class="key-point"><strong>Drapery:</strong> From stiff, geometric folds on the Siphnian Treasury goddesses to the 'wet drapery' effect on the Parthenon east pediment Aphrodite, where fabric clings to the body beneath.</span>
+<span class="key-point"><strong>Composition:</strong> How figures are arranged — the development of diagonal compositions, contrapposto, dominant verticals and horizontals.</span>
+<span class="key-point"><strong>Use of space:</strong> Solving the triangular pediment through reclining figures, or filling a square metope with dynamic combat.</span>
+<p>Material cost, number of figures, and named sculptors are <em>not</em> measures of technical skill. We don't know the names of architectural sculptors, and cramming in more figures doesn't demonstrate skill if they're poorly composed.</p>
+<span class="exam-tip"><strong>Examiner insight (2024):</strong> 'Higher level answers took into account issues such as the use of space, proportionality, and unity of theme/narrative, rather than analysing figures only on whether they looked realistic/naturalistic.' Technical accomplishment is broader than just 'does it look real?'</span>`
+      }
+    ]
+  },
+
+  // ===== SECTION 2: 6TH CENTURY ===== correct: C, multi, A, D, B
+  {
+    section: "6th Century — The 'Imaginative' Period?",
+    sectionDesc: "You need detailed knowledge of early architectural sculpture to argue it was imaginative despite (or because of) its technical limitations. Examiner reports note candidates often struggle with this material.",
+    questions: [
+      {
+        type: "single",
+        tags: ["ao1"],
+        text: "The Medusa pediment from the Temple of Artemis at Corcyra (c.580 BC) uses radically different scales for its figures. What is the compositional effect of this?",
+        options: [
+          "It demonstrates that the sculptor was attempting naturalistic proportions but lacked the mathematical skill to achieve unity of scale across all figures",
+          "It was designed to be viewed at close range inside the temple cella, where the scale differences would be less noticeable to worshippers approaching the cult statue at the far end of the interior space",
+          "The colossal Medusa and panthers dominate the apex, creating an immediate and powerful visual impact that would have been visible and striking from ground level",
+          "It reflects a deliberate attempt to show the relative importance of the gods compared to mortals through a proportional hierarchy based on divine rank"
+        ],
+        correct: 2,
+        feedbackCorrect: "Exactly — the scale hierarchy creates a powerful apotropaic (evil-averting) visual statement. This is arguably an imaginative choice, not just a technical limitation.",
+        feedbackWrong: "The Corcyra pediment is one of your most important examples — you need to know it well.",
+        remedial: `<p>The <strong>Temple of Artemis at Corcyra (c.580 BC)</strong> is the earliest large-scale pedimental sculpture on the specification and <em>essential</em> for this essay:</p>
+<span class="key-point"><strong>Central group:</strong> An enormous Medusa (nearly 3m tall) flanked by two panthers fills the apex. Medusa is shown frontally — her face confronts the viewer directly. This is an <strong>apotropaic</strong> device (designed to ward off evil).</span>
+<span class="key-point"><strong>Flanking scenes:</strong> Much smaller, unrelated narratives fill the sides — Zeus fighting a giant, a dead Trojan, plus tiny figures in the corners. These have <em>no narrative connection</em> to Medusa.</span>
+<p>The pediment was positioned high on the exterior of the temple, viewed from below. The scale differences made the central Medusa dominate — a powerful, bold effect. This is <strong>imaginative</strong> because of its confrontational use of frontality and its willingness to combine multiple stories. It's <strong>technically limited</strong> in its flat carving and stiff poses.</p>
+<span class="scholar-ref"><strong>Boardman</strong> describes the central group as having 'tremendous visual power.' <strong>Osborne</strong> warns us not to judge this as a 'failed' Classical pediment — it has its own artistic goals.</span>
+<span class="exam-tip"><strong>For the essay:</strong> Corcyra is your opening example. Don't dismiss it as simply 'primitive' — that's a Level 2 approach.</span>`
+      },
+      {
+        type: "multi",
+        tags: ["ao1", "ao2"],
+        text: "Which of these are valid arguments for the Corcyra pediment being IMAGINATIVE? Select all that apply.",
+        options: [
+          "Multiple unrelated narratives combined in one pediment — an approach later abandoned",
+          "Frontal Medusa face used as a direct, confrontational apotropaic device",
+          "Perfect anatomical naturalism in every figure",
+          "Willingness to use wildly different scales to create visual hierarchy",
+          "The panthers function as both heraldic guardians and decorative space-fillers",
+          "Sophisticated use of contrapposto throughout"
+        ],
+        correct: [0, 1, 3, 4],
+        feedbackCorrect: "You've correctly identified the imaginative features while avoiding the traps. Naturalism and contrapposto are 5th century technical achievements — their absence here is precisely the point.",
+        feedbackWrong: "Be careful to distinguish between what makes Corcyra imaginative and what makes later sculpture technically accomplished.",
+        remedial: `<p>You may have confused <strong>5th century technical achievements</strong> with <strong>6th century imagination</strong>:</p>
+<span class="key-point"><strong>NOT present at Corcyra:</strong> Anatomical naturalism (flat, patterned bodies), contrapposto (rigidly frontal figures), foreshortening, or sophisticated drapery. These are <em>technical</em> developments that came later.</span>
+<span class="key-point"><strong>IS present at Corcyra:</strong> Creative boldness — mixing multiple unrelated stories, using a confrontational frontal face, embracing radical scale contrasts for visual impact.</span>
+<p>The key insight: the things that make Corcyra imaginative are often what <em>wouldn't be acceptable</em> by 5th century standards. Mixed narratives? Abandoned for unity of theme. Wild scales? Replaced by unity of scale. This supports the essay's argument partially — but new forms of imagination replaced the old.</p>
+<span class="scholar-ref"><strong>Osborne</strong> argues archaic art should be valued on its own terms, not as a failed attempt at Classical standards.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1"],
+        text: "The Herakles and the Kerkopes metope from Temple C at Selinus (c.540 BC) is carved in limestone. What is significant about its composition?",
+        options: [
+          "The humorous subject — Herakles carrying the mischievous Kerkopes upside-down on a pole — is unique and playful in a way rarely seen in later, more 'serious' architectural sculpture",
+          "It uses perfect foreshortening and three-quarter views throughout, anticipating the technical developments of the Early Classical period by nearly a century",
+          "It depicts the Centauromachy in exactly the same compositional format as the later Parthenon south metopes, suggesting a continuous and unchanging iconographic tradition stretching across the entire archaic and classical periods",
+          "It shows Herakles reclining in a corner position, demonstrating an early attempt to solve the pedimental space problem that was later perfected at Olympia"
+        ],
+        correct: 0,
+        feedbackCorrect: "Excellent — the comic, playful tone is exceptional and rarely matched in later architectural sculpture. A strong example of early imaginative freedom.",
+        feedbackWrong: "The Selinus metope is easily overlooked but very useful for this essay.",
+        remedial: `<p>The <strong>Herakles and the Kerkopes metope from Temple C at Selinus (c.540 BC)</strong> is one of the most characterful pieces on the specification:</p>
+<span class="key-point"><strong>Subject:</strong> Herakles carries two mischievous thieves (the Kerkopes) upside-down, slung from a carrying pole. Their grinning faces look directly out at the viewer. This is a <em>comic</em> scene — humorous and playful.</span>
+<span class="key-point"><strong>Why it matters:</strong> This comic tone is virtually absent from later 5th century architectural sculpture, which tends toward the heroic, solemn, or violent. A 6th century sculptor choosing comedy for a sacred building suggests greater imaginative freedom.</span>
+<p><strong>Technically:</strong> The carving is relatively crude — limestone limits detail, figures are somewhat flat. But the <em>conception</em> is wonderful.</p>
+<span class="exam-tip"><strong>For the essay:</strong> Use Selinus alongside Corcyra as evidence that 6th century work had an imaginative range (horror at Corcyra, comedy at Selinus) that narrowed as conventions were established. 5th century architectural sculpture is almost never funny.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1", "ao2"],
+        text: "The Siphnian Treasury frieze at Delphi (c.525 BC) depicts the Gigantomachy. How does it demonstrate BOTH imagination and early technical skill?",
+        options: [
+          "It avoids depicting any combat or violence, instead showing the gods seated in contemplation — a psychologically sophisticated but technically simple approach",
+          "It copies the compositional format of the Parthenon frieze exactly, proving that the later sculptors had no new ideas of their own and merely repeated established designs",
+          "It depicts only a single pair of combatants in isolation, without any background figures or overlapping forms, keeping the composition deliberately minimal",
+          "It uses a continuous narrative with overlapping figures, chariots, and varied combat groups, with each god shown fighting with individual personality and character"
+        ],
+        correct: 3,
+        feedbackCorrect: "The Siphnian Treasury is a crucial transitional example — it shows real ambition in both conception and execution, sitting at the intersection of imagination and growing skill.",
+        feedbackWrong: "The Siphnian Treasury is a key transitional piece — let's go through it properly.",
+        remedial: `<p>The <strong>Siphnian Treasury frieze at Delphi (c.525 BC)</strong> bridges the gap between archaic experimentation and Classical mastery:</p>
+<span class="key-point"><strong>Imaginative features:</strong> The gods actively participate in battle (not just presiding). Cybele rides a lion-drawn chariot. Artemis steps forward in time with Apollo as he fires arrows. Each god fights differently, revealing personality through action.</span>
+<span class="key-point"><strong>Technical advances:</strong> Figures overlap, creating spatial depth. The continuous frieze format allows sustained narrative. Individual figures show more anatomical detail than Corcyra or Selinus.</span>
+<p>It sits at the crossroads: <em>more</em> technically accomplished than Corcyra but <em>more</em> imaginative in characterisation than many later works.</p>
+<span class="scholar-ref"><strong>Boardman</strong> notes the frieze shows 'remarkable variety and invention' — combining 'variety' and 'invention' with technical achievement.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1"],
+        text: "The west pediment of the Temple of Aphaia at Aigina (c.500 BC) depicts the Trojan War. What is its most notable compositional achievement?",
+        options: [
+          "It uses multiple unrelated narratives from different myths, similar to the approach at Corcyra, with each group of figures telling a completely separate story and no attempt at thematic or compositional unity across the pediment",
+          "A central Athena with symmetrical groups of fighting warriors fills the space, achieving unity of theme and unity of scale for one of the first times in pedimental sculpture",
+          "It depicts only reclining figures throughout the entire pediment, demonstrating a complete solution to the corner-space problem without any standing or fighting figures",
+          "It abandons the triangular pediment format entirely, placing all the figures in a single horizontal band like an Ionic frieze rather than adapting to the triangular shape"
+        ],
+        correct: 1,
+        feedbackCorrect: "Aigina represents a major step: unity of theme and unity of scale — both technical AND imaginative achievements. Comparing the west and east pediments shows rapid development.",
+        feedbackWrong: "Aigina is a key development in pedimental sculpture — let's review it.",
+        remedial: `<p>The <strong>Temple of Aphaia at Aigina</strong> has <em>two</em> pediments from different dates:</p>
+<span class="key-point"><strong>West pediment (c.500 BC, Late Archaic):</strong> Central Athena stands rigidly, flanked by symmetrical fighting warriors. The dying warrior in the corner still wears an archaic smile despite being mortally wounded. <strong>Unity of theme</strong> achieved (all one battle) and <strong>unity of scale</strong> (all figures proportional).</span>
+<span class="key-point"><strong>East pediment (c.480 BC, Early Classical):</strong> Same format but more dynamic — Athena is more involved, warriors twist more naturally, the dying warrior shows genuine pain instead of an archaic smile.</span>
+<p>The move from the archaic smile (west) to genuine suffering (east) is analytically rich. Is losing the smile a loss of 'imagination' (the uncanny effect of a smiling dying man) or a gain (psychological truth)?</p>
+<span class="exam-tip"><strong>Examiner insight:</strong> The 2023 mark scheme lists 'Archaic west pediment v Early Classical east pediment' as a key comparison. Always specify WHICH pediment you mean.</span>`
+      }
+    ]
+  },
+
+  // ===== SECTION 3: 5TH CENTURY ===== correct: multi, A, C, D, B, multi
+  {
+    section: "5th Century — Technical Mastery",
+    sectionDesc: "The 5th century examples show increasing technical accomplishment. Your task is to assess whether this came at the cost of imagination — or whether new forms of creativity emerged.",
+    questions: [
+      {
+        type: "multi",
+        tags: ["ao1", "ao2"],
+        text: "The Olympia metopes (c.460 BC) depict the Labours of Herakles. Which features show IMAGINATION in their design? Select all that apply.",
+        options: [
+          "Herakles ages across the sequence of twelve metopes — from beardless youth to mature hero",
+          "The Cretan Bull metope uses a dramatic X-shaped composition with the bull and Herakles forming crossing diagonals",
+          "Athena appears in the Garden of the Hesperides metope, helping Herakles in a tender, human way",
+          "The Stables of Augeas includes Athena directing Herakles, creating a quiet, thoughtful scene amid the action",
+          "Every metope uses exactly the same composition",
+          "The sculptors varied the emotional tone — from violent action to quiet contemplation across different metopes"
+        ],
+        correct: [0, 1, 2, 3, 5],
+        feedbackCorrect: "Superb — the Olympia metopes are your strongest counter-argument to the essay's claim. They show BOTH technical accomplishment AND rich imagination working together.",
+        feedbackWrong: "The Olympia metopes are arguably the most important examples for this essay.",
+        remedial: `<p>The <strong>Olympia metopes (c.460 BC)</strong> are your <em>single most powerful counter-argument</em> against the statement:</p>
+<span class="key-point"><strong>The ageing Herakles:</strong> Across twelve metopes, Herakles ages from beardless youth to mature hero — a sequential narrative device turning individual panels into a connected life story.</span>
+<span class="key-point"><strong>The Cretan Bull:</strong> Herakles and the bull form a dramatic X-composition — bodies crossing diagonally. Both technically accomplished and imaginatively bold.</span>
+<span class="key-point"><strong>Garden of the Hesperides:</strong> A rare quiet moment — Athena sits while Herakles supports the sky. Tender and intimate, utterly different from the violent Cretan Bull. This <em>emotional range</em> shows extraordinary imagination.</span>
+<span class="key-point"><strong>Stables of Augeas:</strong> Athena directs Herakles in an almost domestic scene. Calm authority contrasts with physical labour.</span>
+<span class="scholar-ref"><strong>Boardman</strong> calls these 'among the finest achievements of Early Classical sculpture.' Their combination of technical mastery and narrative imagination directly challenges the essay's binary.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1", "ao2"],
+        text: "The Temple of Zeus at Olympia has two contrasting pediments. Why is this contrast itself an argument for imagination?",
+        options: [
+          "The east pediment's eerie stillness before the chariot race, contrasted with the west pediment's violent centauromachy, creates a deliberate dramatic pairing of tension against action",
+          "Both pediments depict exactly the same myth from different angles, so the contrast is purely a matter of physical viewpoint rather than any deliberate creative decision by the sculptors",
+          "One pediment was completed by a skilled Athenian workshop while the other was left unfinished by a less talented local team, creating what appears to be an accidental contrast that has been misinterpreted by modern scholars as a deliberate artistic pairing",
+          "The contrast exists only because the two pediments were carved several centuries apart, reflecting changing tastes rather than a single unified artistic programme"
+        ],
+        correct: 0,
+        feedbackCorrect: "The deliberate pairing of stillness and violence is one of the most imaginatively sophisticated conceptions in Greek architectural sculpture.",
+        feedbackWrong: "The two Olympia pediments work as a pair — understanding this is essential.",
+        remedial: `<p>The <strong>Temple of Zeus at Olympia (c.470–457 BC)</strong> has two pediments creating a deliberate dramatic contrast:</p>
+<span class="key-point"><strong>East pediment — 'The Calm Before the Storm':</strong> Zeus stands centrally, flanked by competitors for the chariot race. All figures are <em>standing still</em>. But the viewer who knows the myth understands terrible violence is about to erupt. Elderly seers crouch anxiously; river gods recline in the corners.</span>
+<span class="key-point"><strong>West pediment — 'The Storm':</strong> Apollo at the centre of a violent centauromachy. Centaurs grapple with Lapiths in explosive combat. Lapith women are dragged by centaurs.</span>
+<p>The <strong>deliberate pairing</strong> — frozen tension vs exploding violence — is an act of extraordinary imagination requiring viewers to experience both ends of the building.</p>
+<span class="scholar-ref"><strong>Spivey</strong> emphasises the psychological complexity of the east pediment's 'calm before the storm' — a form of imagination that <em>requires</em> technical skill to express through subtle body language.</span>
+<span class="exam-tip"><strong>For the essay:</strong> This is devastating evidence against the statement. The Olympia pediments are more technically accomplished than Corcyra AND more psychologically imaginative.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1"],
+        text: "Parthenon Metope XXVII shows a centaur rearing over a fallen Lapith. What makes this compositionally significant?",
+        options: [
+          "It is the only Parthenon metope carved in limestone rather than Pentelic marble, making it technically distinct from all the others in the series",
+          "It depicts a mythological scene never shown anywhere before in Greek art, making it entirely original in subject matter as well as composition",
+          "The dramatic diagonal of the centaur's body creates a powerful sense of movement, with the Lapith's billowing cloak forming a counterbalancing arc across the square metope",
+          "It uses a completely symmetrical composition with the centaur and Lapith placed as mirror images of each other on either side of a central vertical axis"
+        ],
+        correct: 2,
+        feedbackCorrect: "Good — the compositional virtuosity is extraordinary. But for the essay, consider: is compositional refinement itself a form of imagination, or merely technical polish applied to a recycled subject?",
+        feedbackWrong: "Let's look at the Parthenon metopes in detail — you'll need specific visual knowledge for AO1.",
+        remedial: `<p>The <strong>Parthenon south metopes (c.447–442 BC)</strong> depict the Centauromachy. Three are prescribed — XXVI, XXVII, XXVIII:</p>
+<span class="key-point"><strong>Metope XXVI:</strong> A centaur rears triumphantly over a collapsed Lapith. Strong diagonal from lower left to upper right, with a counter-diagonal from the Lapith's body.</span>
+<span class="key-point"><strong>Metope XXVII:</strong> The most dramatic — centaur rears with foreleg raised to strike. The Lapith's cloak billows outward, counterbalancing the centaur's forward thrust. Superb musculature on both human and horse parts.</span>
+<span class="key-point"><strong>Metope XXVIII:</strong> Strikingly different — a Lapith has gained the upper hand, gripping the centaur backwards. This variety across adjacent panels shows creative thinking <em>within</em> a repeated subject.</span>
+<p>The centauromachy had been depicted at Olympia already. You could argue the <em>subject</em> is unimaginative (recycled) but the <em>treatment</em> shows real variety.</p>
+<span class="exam-tip"><strong>Examiner misconception (2022):</strong> 'Some candidates thought that all the Parthenon metopes depicted scenes from the Centauromachy and were therefore boring.' The four sides actually show four different subjects (Centauromachy, Gigantomachy, Amazonomachy, Trojan War).</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1", "ao2"],
+        text: "The Parthenon frieze (c.440s BC) is unique among Ionic friezes on the specification. What makes its subject matter so significant?",
+        options: [
+          "It depicts the Gigantomachy in even greater detail than the Siphnian Treasury, with more gods and more dramatic combat scenes across its much longer continuous surface",
+          "It shows a combined Centauromachy and Amazonomachy in the same continuous frieze, blending two battle narratives that other buildings kept separate",
+          "It restricts itself to purely decorative, non-narrative floral and geometric patterns, abandoning mythological subjects entirely in favour of abstract beauty",
+          "It depicts the Panathenaic procession — a contemporary civic and religious event rather than myth — making it a revolutionary departure from every other temple frieze"
+        ],
+        correct: 3,
+        feedbackCorrect: "This is your single strongest argument against the statement. The most technically accomplished building produced the most radically original subject in all Greek architectural sculpture.",
+        feedbackWrong: "This is arguably the most important single fact for this essay — you need to learn it.",
+        remedial: `<p>The <strong>Parthenon Ionic frieze (c.440s BC)</strong> is the most important single example for demolishing the essay's claim:</p>
+<span class="key-point"><strong>Every other Ionic frieze on the specification depicts mythology:</strong><br>
+• Siphnian Treasury (c.525 BC) = Gigantomachy<br>
+• Temple of Apollo, Bassae (c.420–400 BC) = Centauromachy and Amazonomachy<br><br>
+<strong>The Parthenon frieze depicts the Panathenaic procession</strong> — a real contemporary civic event, showing Athenian citizens (horsemen, sacrificial animals, musicians) processing toward the seated gods.</span>
+<p>This was <strong>revolutionary</strong>. No Greek temple had ever depicted a contemporary event. The decision to show real Athenians on the same building as the gods was extraordinary.</p>
+<span class="scholar-ref"><strong>Jenkins</strong> argues this was an unprecedented fusion of the divine and mortal worlds. <strong>Boardman</strong> calls it the most innovative sculptural programme of the 5th century.</span>
+<span class="exam-tip"><strong>For the essay:</strong> If the most technically accomplished building produced the most radically imaginative frieze, the statement cannot be universally true.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao1"],
+        text: "The Parthenon east pediment includes a reclining figure often identified as Dionysus/Herakles. What makes this figure technically remarkable?",
+        options: [
+          "It is the only pedimental figure from any Greek temple that still retains its original painted surface, allowing us to see the full polychrome effect the sculptor intended",
+          "It is carved fully in the round — including the back that would never be seen — with musculature that 'unwinds' as the viewer moves around it",
+          "It was carved from a single block of imported Parian marble rather than the local Pentelic marble used for the rest of the Parthenon, showing that special materials were reserved for key figures",
+          "It uses the archaic smile and frontal pose characteristic of 6th century sculpture, making it a deliberate throwback to earlier artistic traditions within a 5th century context"
+        ],
+        correct: 1,
+        feedbackCorrect: "The finishing of unseen surfaces represents extraordinary dedication — technique pushed beyond practical necessity, which is itself an imaginative statement about the nature of sculpture.",
+        feedbackWrong: "This figure is one of the most discussed pieces of Greek sculpture — let's examine why.",
+        remedial: `<p>The <strong>reclining Dionysus/Herakles from the Parthenon east pediment (c.438–432 BC)</strong>:</p>
+<span class="key-point"><strong>What you see:</strong> A powerfully built male figure reclines on a rock draped with animal skin. His body twists — legs face one direction, torso turns — creating the sense of slowly 'unwinding' from one viewpoint to another. Every muscle group is rendered with anatomical precision.</span>
+<span class="key-point"><strong>What's remarkable:</strong> The BACK — which sat against the tympanum wall and would <em>never be seen</em> — is carved with the same detail as the front. The back muscles are fully modelled.</span>
+<p>This raises a key question: carving the unseen back is technical accomplishment pushed beyond necessity, but it's also an <strong>imaginative statement</strong> about sculpture as fully three-dimensional art.</p>
+<span class="scholar-ref"><strong>Boardman</strong> suggests this reflects a new conception of sculpture as existing fully in three dimensions regardless of viewing angle.</span>
+<span class="exam-tip"><strong>Examiner misconception (2024):</strong> 'Some candidates wrote with great conviction about the expressions on the faces of Ilissos, Aphrodite and the dying Lapith.' These faces are mostly damaged or lost — don't invent expressions you can't see!</span>`
+      },
+      {
+        type: "multi",
+        tags: ["ao1", "ao2"],
+        text: "The Temple of Apollo at Bassae (c.420–400 BC) has an Ionic frieze depicting the Centauromachy and Amazonomachy. Which features could support EITHER side of the argument?",
+        options: [
+          "The dynamic poses show tremendous energy — imagination in the execution",
+          "The subjects are repeated from earlier buildings — arguably unimaginative choice",
+          "The carving quality is considered by some scholars inferior to the Parthenon — complicating a narrative of continuous technical progress",
+          "The emotional intensity and violence is more extreme than earlier examples — pushing boundaries",
+          "The frieze was placed inside the cella rather than outside — an innovative architectural decision"
+        ],
+        correct: [0, 1, 2, 3, 4],
+        feedbackCorrect: "Excellent — ALL of these are valid analytical points. Bassae supports both sides simultaneously, making it perfect for a nuanced argument.",
+        feedbackWrong: "Bassae supports both sides of the argument. Let's explore this.",
+        remedial: `<p><strong>All five points are valid</strong> — recognising this is Level 5 thinking. Bassae resists simple categorisation:</p>
+<span class="key-point"><strong>FOR the statement:</strong> Centauromachy was already at Olympia and the Parthenon. Choosing these subjects again could suggest a narrowing repertoire.</span>
+<span class="key-point"><strong>AGAINST the statement:</strong> The treatment is different — violence and emotional intensity are more extreme. The interior placement is itself innovative — viewers would experience it close-up in flickering lamplight.</span>
+<span class="key-point"><strong>Complicating factor:</strong> The carving quality is debated — some consider it less refined than the Parthenon, which disrupts a simple narrative of continuous 'progress.'</span>
+<span class="exam-tip"><strong>For the essay:</strong> Use Bassae to show the relationship between imagination and technique is not a simple inverse correlation. Sometimes both decline together, sometimes both advance.</span>`
+      }
+    ]
+  },
+
+  // ===== SECTION 4: COMPOSITIONAL ANALYSIS ===== correct: C, A, D, B
+  {
+    section: "Compositional Analysis Skills",
+    sectionDesc: "The 2024 examiner report stressed that 'higher level answers took into account issues such as the use of space, proportionality, and unity of theme/narrative.' This section tests analytical skills that separate Level 3 from Level 5.",
+    questions: [
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "What does 'unity of theme' mean in architectural sculpture, and why does it matter for this essay?",
+        options: [
+          "The sculpture must use the same architectural order throughout — either Doric metopes or Ionic friezes, never mixing the two on the same building",
+          "All figures in the sculpture must be standing in identical poses, creating visual harmony through exact repetition of the same posture",
+          "All the figures in a pediment, frieze or metope programme belong to a single connected narrative or mythological event",
+          "Every temple across the Greek world must depict the same mythological subject, creating unity across different religious sites"
+        ],
+        correct: 2,
+        feedbackCorrect: "Good — and the development of unity of theme is itself both a technical AND an imaginative achievement, complicating the question's binary.",
+        feedbackWrong: "Unity of theme is a core concept listed in the specification — let's clarify it.",
+        remedial: `<p><strong>Unity of theme</strong> means all figures belong to a single connected narrative. It's explicitly in the OCR specification. Here's how it develops:</p>
+<span class="key-point"><strong>Corcyra (c.580 BC):</strong> NO unity. Medusa, Zeus-and-giant, Trojan War — completely unrelated narratives crammed together.</span>
+<span class="key-point"><strong>Aigina (c.500/480 BC):</strong> ACHIEVES unity. Both pediments depict the Trojan War — every figure belongs to one battle.</span>
+<span class="key-point"><strong>Olympia (c.460 BC):</strong> MASTERS unity in both pediments and metopes.</span>
+<span class="key-point"><strong>Parthenon (c.438–432 BC):</strong> Each element has its own unified theme.</span>
+<p>The development of unity of theme is <em>both</em> a technical achievement (skill to connect figures coherently) <em>and</em> an imaginative achievement (creative vision to conceive unified narratives). This complicates the question's assumption that technique and imagination are opposites.</p>`
+      },
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "The Parthenon pediments arguably abandon strict 'unity of scale' (central gods are larger than flanking figures). What does this suggest about imagination and technical skill?",
+        options: [
+          "Rules can be broken imaginatively once mastered — the scale hierarchy was a deliberate creative choice enabled by the sculptors' technical confidence and deep understanding of the convention",
+          "The Parthenon sculptors were less competent than those at Aigina and simply failed to maintain the proportional consistency that earlier workshops had achieved",
+          "Unity of scale was never actually important to Greek sculptors at any period — it was a modern scholarly invention imposed retrospectively on the ancient material",
+          "The Parthenon pediments are widely regarded as artistic failures precisely because they abandoned unity of scale, and most scholars view this as a regression"
+        ],
+        correct: 0,
+        feedbackCorrect: "Exactly — breaking a 'rule' knowingly and purposefully is a sign of both mastery and imagination. Like a novelist using a sentence fragment for effect.",
+        feedbackWrong: "This is one of the most subtle analytical points you can make in this essay.",
+        remedial: `<p>This demonstrates the <strong>nuanced thinking</strong> that earns Level 5:</p>
+<span class="key-point"><strong>The development:</strong> Unity of scale was first achieved at Aigina (c.500 BC), maintained at Olympia (c.460 BC). At the Parthenon (c.438–432 BC), central gods appear slightly larger than surrounding figures.</span>
+<p>A superficial reading calls this 'regression.' But the Parthenon sculptors <em>knew</em> the rule — their departure was a <em>deliberate creative choice</em> to create visual emphasis. Making Athena and Poseidon larger draws the eye to the narrative climax.</p>
+<p>This illustrates how technical mastery can <em>enable</em> rather than constrain imagination. You have to know the rule before you can break it meaningfully.</p>
+<span class="scholar-ref"><strong>Boardman</strong> sees this as evidence of supreme confidence — they could manipulate established principles for expressive effect.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2", "examiner"],
+        text: "The 2022 examiner report noted a common misconception about the appearance of architectural sculpture. Which of these is TRUE?",
+        options: [
+          "Architectural sculpture was always left as plain white marble or limestone, because Greek artists valued the natural beauty of the stone and considered paint to be a barbaric Eastern practice incompatible with their aesthetic principles",
+          "Only the metopes and pediments were painted, while Ionic friezes were always left unpainted since their more delicate carving made adding colour technically impossible",
+          "Painting was a 4th century innovation that was applied retrospectively to earlier buildings during the Hellenistic period, meaning the original 6th and 5th century sculptures were unpainted",
+          "All architectural sculpture was extensively painted in vivid colours — polychromy was itself a creative element of the design, and its loss distorts our judgement toward valuing carving over colour"
+        ],
+        correct: 3,
+        feedbackCorrect: "Correct — and this is important for the essay. The loss of polychromy means we judge these works purely on carving, biasing our assessment toward 'technical accomplishment.'",
+        feedbackWrong: "This misconception was flagged by the examiners — don't make it in the exam.",
+        remedial: `<p>The <strong>2022 examiner report</strong> specifically flagged the misconception that sculptors 'did not have access to colour':</p>
+<span class="key-point"><strong>ALL Greek architectural sculpture was painted (polychrome).</strong> Eyes, hair, lips, clothing, weapons, backgrounds — all picked out in vivid reds, blues, yellows, greens. Some elements (bronze weapons, golden accessories) were attached separately.</span>
+<p>This matters for your essay because:</p>
+<p>1. <strong>Colour was an imaginative element.</strong> Choosing how to paint a figure was a creative decision we've entirely lost.</p>
+<p>2. <strong>Our judgement is biased.</strong> We assess these works on form and carving alone — emphasising technical accomplishment — because the painted colours have vanished.</p>
+<p>3. <strong>Early works may have been more colourful.</strong> The visual impact of a brightly painted Medusa may have been as striking as a subtly carved Dionysus — just differently.</p>
+<span class="exam-tip"><strong>Examiner tip:</strong> Mentioning polychromy shows sophisticated awareness of how we view these works. It challenges any simple narrative of 'progress.'</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "Which compositional technique is most important for filling corner spaces in pediments?",
+        options: [
+          "Adding purely decorative non-figurative patterns such as palmettes, waves, and geometric motifs to fill the narrowing triangular space without needing human or animal figures",
+          "Using reclining, crouching and fallen figures whose horizontal bodies naturally fit the diminishing triangular space while remaining part of the narrative",
+          "Making all figures exactly the same height and simply cutting off their legs at the bottom to fit within the sloping raking cornice of the pediment",
+          "Leaving the corner spaces deliberately empty as a framing device, allowing the central figures to stand out more dramatically against blank stone"
+        ],
+        correct: 1,
+        feedbackCorrect: "Right — and the development of corner solutions beautifully illustrates how technical innovation and imaginative creativity worked together, not against each other.",
+        feedbackWrong: "The pedimental corner problem is central to this essay's argument. Let's trace the solutions.",
+        remedial: `<p>The <strong>triangular pediment</strong> narrows sharply toward the corners. The development of solutions is central to your essay:</p>
+<span class="key-point"><strong>Corcyra (c.580 BC):</strong> Small, unrelated figures crammed in with knees drawn up. Feels forced.</span>
+<span class="key-point"><strong>Aigina (c.500/480 BC):</strong> Dying warriors fill corners — collapsing bodies naturally create low forms that fit the space AND belong to the battle scene (unity of theme).</span>
+<span class="key-point"><strong>Olympia (c.460 BC):</strong> River gods (Alpheus, Kladeos) recline in corners — fitting the space AND providing geographic context. Beautifully carved muscular bodies.</span>
+<span class="key-point"><strong>Parthenon (c.438–432 BC):</strong> Dionysus/Herakles reclining at one end, Aphrodite in her mother's arms at the other. Carved fully in the round, bodies seem to 'unwind.'</span>
+<p>Each solution required <em>both</em> technical innovation (carving convincing reclining anatomy) AND imaginative thinking (which figures could logically recline in the narrative).</p>`
+      }
+    ]
+  },
+
+  // ===== SECTION 5: SCHOLARS ===== correct: D, C, A, B, C
+  {
+    section: "Scholarly Perspectives",
+    sectionDesc: "The 2024 mark scheme clarifies: 'if two or more scholars are cited the response will receive the second mark up within the level; greater engagement will elicit a higher mark.' You need at least two, meaningfully used.",
+    questions: [
+      {
+        type: "single",
+        tags: ["scholar", "ao2"],
+        text: "John Boardman's developmental approach to Greek sculpture would best support which argument?",
+        options: [
+          "Only 6th century sculpture has genuine artistic value, and everything after Aigina represents a decline into sterile academicism and repetitive subject matter",
+          "Technical progress was purely destructive to creativity — every advance in carving skill came at a direct and measurable cost to the sculptor's imaginative freedom",
+          "Architectural sculpture is fundamentally less important than free-standing sculpture, and scholars should focus their attention on kouroi and bronze casting instead",
+          "Imagination and skill advanced together in a broadly positive trajectory — technical mastery opened new creative possibilities rather than closing them down"
+        ],
+        correct: 3,
+        feedbackCorrect: "Good — Boardman's view largely challenges the essay's binary opposition. Use him to frame your overall argument.",
+        feedbackWrong: "Boardman is likely the most useful scholar for this essay — let's understand his perspective.",
+        remedial: `<p><strong>John Boardman</strong> takes a broadly <em>developmental</em> approach — Greek art progresses through experimentation toward mastery, with each period building on the last.</p>
+<span class="key-point"><strong>How to use him:</strong> He provides a framework that challenges the statement. He sees the Olympia metopes as showing 'remarkable variety and invention' within a technically mature framework, and the Parthenon as the culmination of <em>both</em> technical and conceptual development.</span>
+<span class="key-point"><strong>On Corcyra:</strong> He acknowledges 'tremendous visual power' while noting technical limitations — treating boldness and skill as separate categories.</span>
+<p><strong>In your essay:</strong> Use Boardman early: 'Boardman's developmental view suggests technical mastery and creative ambition advanced in parallel — challenging the statement's assumption of an inverse relationship.'</p>
+<span class="exam-tip"><strong>Examiner advice (2023):</strong> 'Candidates should refer to the opinions of at least two different scholars and be prepared to engage with those opinions. Quotation is not necessary.'</span>`
+      },
+      {
+        type: "single",
+        tags: ["scholar", "ao2"],
+        text: "Nigel Spivey's emphasis on psychological depth in Greek art is most useful for arguing what?",
+        options: [
+          "That the Parthenon sculptures are technically incompetent compared to earlier works, and their enduring reputation is based entirely on cultural prestige and Athenian imperial propaganda rather than genuine artistic quality or innovation",
+          "That only the use of polychrome paint and added colour matters in assessing Greek sculpture, and purely formal analysis of carving is misleading",
+          "That psychological and emotional sophistication represents a form of imagination that only became possible once sculptors had the technical skill to express subtle states of mind",
+          "That Greek sculptors had no genuine imagination at any period — they simply copied Egyptian prototypes and gradually refined the borrowed forms"
+        ],
+        correct: 2,
+        feedbackCorrect: "Precisely — Spivey helps you argue that some forms of imagination REQUIRE technical accomplishment. Psychological subtlety can't be expressed with crude carving.",
+        feedbackWrong: "Spivey's perspective is invaluable for dismantling the essay's binary.",
+        remedial: `<p><strong>Nigel Spivey</strong> focuses on what Greek art makes us <em>feel</em> and how it conveys inner states.</p>
+<span class="key-point"><strong>Key argument:</strong> His discussion of the Olympia east pediment's 'calm before the storm' — eerie stillness of figures who know violence is coming — represents imagination that is <em>impossible without technical skill</em>. Conveying anxiety through subtle body language requires mastery of anatomical carving.</span>
+<p><strong>The crucial point:</strong> Some forms of imagination require technical accomplishment. You can't express psychological complexity through flat, archaic carving. Corcyra achieves a powerful but psychologically simple effect (confrontation). Olympia achieves something far more complex (dramatic irony, tension, ambiguity).</p>
+<span class="key-point"><strong>How to use:</strong> 'As Spivey argues, the psychological depth of the Olympia east pediment demonstrates a form of imagination that is only conceivable with technical mastery of facial expression and body language — the very opposite of the statement's claim.'</span>`
+      },
+      {
+        type: "single",
+        tags: ["scholar", "ao2"],
+        text: "Robin Osborne's argument that archaic art should be valued on its own terms is most useful for which point?",
+        options: [
+          "Challenging the assumption that 'less technically accomplished' automatically means 'more imaginative' — early sculpture had its own distinct aesthetic goals that weren't simply failed attempts at naturalism",
+          "Arguing that 6th century sculpture is objectively and measurably superior to 5th century work by every artistic criterion, and that the entire Classical period from Olympia onward represents a steady decline into technically proficient but soulless academicism",
+          "Claiming that absolutely no meaningful development occurred between the 6th and 5th centuries, and that all apparent changes are modern scholarly inventions",
+          "Arguing that only the Parthenon matters for this specification and that all earlier buildings can be safely ignored in examination responses"
+        ],
+        correct: 0,
+        feedbackCorrect: "Exactly — Osborne prevents you from romanticising archaic art as 'charmingly primitive.' It had its own serious artistic ambitions.",
+        feedbackWrong: "Osborne's perspective is more subtle than it first appears — it challenges BOTH sides.",
+        remedial: `<p><strong>Robin Osborne</strong> warns against a <em>teleological</em> view — assuming everything headed toward Classical 'perfection' with earlier work as merely primitive steps on the journey.</p>
+<span class="key-point"><strong>Key insight:</strong> The Corcyra Medusa wasn't a <em>failed attempt</em> at a Parthenon pediment. It pursued different goals: visual power, confrontation, apotropaic function. Judging it by Classical standards misses the point.</span>
+<p><strong>Osborne challenges both sides:</strong></p>
+<p>• Challenges those who call 6th century work 'charmingly imaginative because it couldn't do better'</p>
+<p>• Also challenges those who see Classical work as simply 'better' — it's different, not superior</p>
+<span class="key-point"><strong>How to use:</strong> 'Osborne cautions against reading development as simple progress. If archaic sculptors pursued different aesthetic goals, then the relationship between imagination and technique is more complex than the statement implies.'</span>`
+      },
+      {
+        type: "single",
+        tags: ["scholar", "ao2"],
+        text: "Ian Jenkins would be most useful for arguing that the Parthenon frieze was...",
+        options: [
+          "Simply a copy of the Siphnian Treasury frieze reproduced on a larger scale, showing that Athenian sculptors lacked originality and relied on borrowing from earlier Ionic workshops",
+          "A revolutionary creative decision — unprecedented in showing contemporary civic life on a temple, fusing the divine and mortal worlds in a way no previous Greek building had attempted",
+          "Technically flawed in its execution, with poorly proportioned figures and inconsistent carving quality that reveals it was produced too quickly by an overstretched workshop",
+          "Less architecturally significant than the metopes, since the frieze was placed in a position where it would have been extremely difficult for most viewers to see clearly"
+        ],
+        correct: 1,
+        feedbackCorrect: "Perfect — Jenkins' emphasis on the frieze's unprecedented subject matter is devastating evidence against the essay's claim.",
+        feedbackWrong: "Jenkins' perspective on the Parthenon frieze is one of your most powerful scholarly tools.",
+        remedial: `<p><strong>Ian Jenkins</strong>, former curator of the Parthenon sculptures at the British Museum:</p>
+<span class="key-point"><strong>His key argument:</strong> The Panathenaic procession was an unprecedented fusion of divine and mortal worlds. No previous temple had depicted a contemporary civic event.</span>
+<p><strong>Why this demolishes the statement:</strong> If the most technically accomplished building produced the most radically <em>imaginative</em> subject, the claim of an inverse relationship fails.</p>
+<span class="key-point"><strong>How to use:</strong> Deploy Jenkins as your 'clincher': 'As Jenkins argues, the Parthenon frieze represents an unprecedented creative decision only conceivable within the context of supreme technical confidence — the very opposite of the statement's claim.'</span>`
+      },
+      {
+        type: "single",
+        tags: ["scholar", "ao2"],
+        text: "Susan Woodford's descriptive approach to Greek art is best used in this essay for...",
+        options: [
+          "Providing an exact quotation for the opening sentence of every single paragraph, since examiners specifically reward verbatim citations above all other forms of scholarly engagement",
+          "Entirely replacing your own analysis with her descriptions, since Woodford's published views carry more weight than any argument a student could construct independently",
+          "Appreciating the visual impact of individual pieces — whether the work delights, surprises, moves, or impresses the viewer — which is itself a measure of imaginative success",
+          "Only describing 6th century works, since Woodford's scholarship focuses exclusively on the archaic period and she has nothing relevant to say about Classical sculpture"
+        ],
+        correct: 2,
+        feedbackCorrect: "Good — use Woodford selectively. Her emphasis on aesthetic impact can support arguments about imaginative success, but don't overuse her phrases.",
+        feedbackWrong: "Woodford is useful but must be deployed carefully.",
+        remedial: `<p><strong>Susan Woodford</strong> focuses on the visual experience — what Greek art looks and feels like to the viewer.</p>
+<span class="key-point"><strong>How to use her:</strong> She helps you argue that imagination can be measured by <em>impact on the viewer</em>. A technically crude but visually striking piece (Corcyra Medusa) might be as imaginatively successful as a technically refined one (Parthenon Dionysus).</span>
+<span class="exam-tip"><strong>Examiner warning (2023):</strong> The report noted Woodford's 'a decorative delight' was 'the most quoted opinion, although she does seem to have said this about many different pots.' Don't over-quote or apply the same phrase to everything.</span>
+<span class="key-point"><strong>Better approach:</strong> Instead of 'Woodford would call this a decorative delight,' write: 'Woodford's emphasis on the viewer's aesthetic experience supports the argument that the Corcyra Medusa, despite its technical limitations, achieves a powerful visual impact that some more refined works lack.' That's <em>engaging</em> with a scholar, not name-dropping.</span>`
+      }
+    ]
+  },
+
+  // ===== SECTION 6: ESSAY PLANNING ===== correct: A, D, B, multi
+  {
+    section: "Essay Planning & Exam Technique",
+    sectionDesc: "The examiner reports emphasise that planning is crucial but 'evidence of planning on scripts was very sparse.' This section tests your ability to structure a Level 5 response.",
+    questions: [
+      {
+        type: "single",
+        tags: ["examiner", "ao2"],
+        text: "What is the most effective essay structure for this particular question?",
+        options: [
+          "Thematic paragraphs exploring different aspects (e.g. subject matter, composition, use of space) with examples from BOTH centuries woven through each, building to a nuanced conclusion",
+          "A chronological tour through every piece of architectural sculpture on the specification from earliest to latest, followed by a brief concluding paragraph summarising the development",
+          "All arguments supporting the statement grouped together in the first half, then all arguments against the statement in the second half, then a final paragraph choosing a side",
+          "One substantial paragraph per building (Corcyra, then Selinus, then Aigina, etc.), describing what you can see in detail before moving on to the next building"
+        ],
+        correct: 0,
+        feedbackCorrect: "A thematic approach allows direct comparison across centuries and demonstrates analytical sophistication — exactly what Level 5 rewards.",
+        feedbackWrong: "Essay structure makes a huge difference to your mark. Let's work through the best approach.",
+        remedial: `<p>The <strong>2024 mark scheme</strong> requires 'a well-developed, sustained and coherent line of reasoning' at Level 5. Your structure must support a developing argument:</p>
+<span class="key-point"><strong>Why thematic works best:</strong> You compare directly across centuries within each paragraph. For example:<br><br>
+<strong>Paragraph on subject matter:</strong> Corcyra's experimental mixing of stories → Olympia's thematic unity → Parthenon frieze's revolutionary civic subject. Conclusion: subject choice remained imaginative throughout, but the <em>type</em> of imagination changed.</span>
+<p><strong>Avoid:</strong></p>
+<p>• <strong>Chronological tour:</strong> Produces 'and then... and then...' narrative description</p>
+<p>• <strong>For/against:</strong> Leads to repetition and disjointed argument</p>
+<p>• <strong>Building-by-building:</strong> Makes comparison difficult, tends toward description</p>
+<span class="exam-tip"><strong>Planning tip (2024):</strong> 'Evidence of planning on scripts was very sparse' but planning 'can really help a candidate to focus.' Spend 3–5 minutes planning your thematic structure before writing.</span>`
+      },
+      {
+        type: "single",
+        tags: ["examiner"],
+        text: "The 2024 examiner report noted weaker knowledge of architectural sculpture. What most effectively demonstrates strong AO1?",
+        options: [
+          "Writing exclusively about the Parthenon since it is the most famous building and examiners will be most impressed by detailed knowledge of this single site",
+          "Naming as many buildings as possible in rapid succession, demonstrating breadth of knowledge even if individual descriptions remain brief and generic",
+          "Focusing on retelling the mythological stories depicted in the sculpture in extensive narrative detail, since the examiner needs to know that you understand the mythological content and can demonstrate your wider reading about Greek religion",
+          "Describing specific figures and compositional details within named pediments, metopes and friezes, using precise visual language that demonstrates genuine first-hand knowledge"
+        ],
+        correct: 3,
+        feedbackCorrect: "Exactly — specific visual detail is the discriminating factor. 'The reclining figure's musculature unwinds from feet to torso' earns far more than 'the Parthenon pediments were detailed.'",
+        feedbackWrong: "AO1 is worth 10 marks — a third of the total. Let's understand what earns top marks.",
+        remedial: `<p>The <strong>2024 examiner report</strong>: 'the level of detail offered was the discriminating factor in awarding marks.'</p>
+<span class="key-point"><strong>Level 2–3 AO1:</strong> 'The Parthenon had pediments with detailed sculpture.'</span>
+<span class="key-point"><strong>Level 4 AO1:</strong> 'The Parthenon east pediment included reclining figures in the corners, such as the figure identified as Dionysus.'</span>
+<span class="key-point"><strong>Level 5 AO1:</strong> 'The reclining Dionysus/Herakles is carved fully in the round — even the back muscles are modelled. His body seems to unwind from one viewpoint to another, the torso twisting from the plane of the legs.'</span>
+<p>The same applies to every example: describe the X-composition of the Cretan Bull, the frontal Medusa at Corcyra, the varied horsemen on the Parthenon frieze.</p>
+<span class="exam-tip"><strong>Examiner insight (2024):</strong> 'Candidates used diagrams this year to illustrate their answers. Such diagrams invariably enhanced the quality of response.' Consider sketching a pediment shape and marking figure positions.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "What is the strongest possible conclusion for this essay?",
+        options: [
+          "Complete agreement with the statement — 6th century sculpture was purely imaginative, 5th century sculpture was purely technical, and there is no overlap or complexity",
+          "A nuanced conclusion: technical mastery both enabled new forms of imagination AND sometimes narrowed the range of acceptable approaches — the relationship is complex, not a simple trade-off",
+          "Complete disagreement — the statement is entirely wrong and there is absolutely no evidence that any imaginative freedom was ever lost at any point during the period",
+          "An admission that the evidence is too fragmentary and contradictory to reach any conclusion at all, and that we simply cannot know the answer"
+        ],
+        correct: 1,
+        feedbackCorrect: "Perfect — Level 5 requires 'convincing conclusions' from 'a wide range of relevant points.' Nuance, not fence-sitting.",
+        feedbackWrong: "Your conclusion is crucial — it's where you demonstrate the quality of your thinking.",
+        remedial: `<p>Level 5 requires 'convincing conclusions' from 'a wide range of relevant points.'</p>
+<span class="key-point"><strong>The strongest conclusion recognises BOTH sides:</strong><br><br>
+<strong>The statement has SOME validity:</strong> Some creative freedom was lost. Mixed narratives at Corcyra, comedy at Selinus — these became 'unacceptable.' The Centauromachy was repeated across buildings.<br><br>
+<strong>But the statement is largely WRONG:</strong> Technical mastery enabled entirely new forms of imagination — Olympia's psychological depth, the Parthenon frieze's revolutionary subject. What changed was not the <em>presence</em> of imagination but its <em>nature</em>.</span>
+<span class="key-point"><strong>Model conclusion:</strong> 'The statement creates a false binary. While some experimental freedoms were lost as conventions solidified, technical mastery opened entirely new creative possibilities. Imagination did not decline; it evolved.'</span>
+<span class="exam-tip"><strong>Nuance ≠ fence-sitting.</strong> Take a clear position ('the statement is largely wrong') while acknowledging complexity.</span>`
+      },
+      {
+        type: "multi",
+        tags: ["examiner"],
+        text: "Based on ALL three examiner reports, which mistakes must you avoid? Select ALL that apply.",
+        options: [
+          "Confusing examples from different media (e.g. describing a vase-painting as if it were on a pediment)",
+          "Writing narrative description rather than compositional analysis",
+          "Claiming architectural sculpture was never painted",
+          "Name-dropping scholars without engaging with their views",
+          "Writing about 4th century examples when the question specifies 6th and 5th centuries",
+          "Including a lengthy introduction that wastes time"
+        ],
+        correct: [0, 1, 2, 3, 4, 5],
+        feedbackCorrect: "All six — you've absorbed the examiner insights. Avoiding these common errors is half the battle.",
+        feedbackWrong: "These are all genuine pitfalls flagged by examiners.",
+        remedial: `<p>All six are flagged across the 2022–2024 examiner reports:</p>
+<span class="exam-tip"><strong>1. Media confusion (2023):</strong> 'Candidates transposed scenes from vase-painting into friezes or metopes.' The wedding of Peleus and Thetis is a vase-painting, NOT a pediment.</span>
+<span class="exam-tip"><strong>2. Description vs analysis (2023):</strong> 'Responses tended towards the narrative/descriptive.' Don't just tell the myth — analyse composition, space, and artistic choices.</span>
+<span class="exam-tip"><strong>3. Colour misconception (2022):</strong> The claim that sculptors 'did not have access to colour' is FALSE — all sculpture was painted.</span>
+<span class="exam-tip"><strong>4. Scholar name-dropping (2023):</strong> Name-dropping without engagement is unhelpful. Say what the scholar argues and how it supports your point.</span>
+<span class="exam-tip"><strong>5. Wrong century (2022):</strong> 'Some confused the dates, giving examples from the 4th century.' This question specifies 6th and 5th centuries only.</span>
+<span class="exam-tip"><strong>6. Lengthy introductions:</strong> Multiple reports note wasted time. Keep yours to 2–3 sentences: define terms, state your line of argument, move on.</span>`
+      }
+    ]
+  },
+
+  // ===== SECTION 7: SYNTHESIS ===== correct: D, C, A, B
+  {
+    section: "Making the Argument",
+    sectionDesc: "This final section tests whether you can synthesise everything into the kind of analytical thinking that earns top marks. These are the hardest questions.",
+    questions: [
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "Consider the development from the Corcyra pediment to the Parthenon pediments. Which statement BEST captures the relationship between imagination and technical skill?",
+        options: [
+          "Imagination declined steadily and measurably as technique improved — each generation of sculptors produced less creative work than the one before",
+          "Technique improved dramatically but imagination stayed exactly the same throughout — sculptors always had the same ideas, they just executed them better over time",
+          "There was no meaningful artistic development at all between the 6th and 5th centuries — the differences are too small to be significant and have been exaggerated by modern scholars",
+          "As sculptors gained mastery, they lost some experimental freedom but gained the ability to express more sophisticated forms of imagination — the nature of creativity changed rather than simply declining"
+        ],
+        correct: 3,
+        feedbackCorrect: "This is the nuanced argument that earns Level 5. The nature of imagination changed; it didn't simply decline.",
+        feedbackWrong: "This is the core argument of the whole essay — let's make sure you understand it fully.",
+        remedial: `<p>This is the <strong>central thesis</strong> of a Level 5 response:</p>
+<span class="key-point"><strong>6th century imagination was bold and experimental:</strong> Corcyra mixed unrelated stories, Selinus chose comedy, the Siphnian Treasury gave gods individual personalities. Creative freedom flourished because conventions hadn't been established. But expressive capability was limited.</span>
+<span class="key-point"><strong>5th century imagination was more sophisticated but more constrained:</strong> Unity of theme became expected. Subjects became more standardised. But new forms emerged — Olympia's psychological tension, the Parthenon frieze's revolutionary subject, dramatic contrast between paired pediments.</span>
+<p><strong>The key insight:</strong> What changed was not the <em>presence</em> of imagination but its <em>nature</em>. Early: 'what can we try?' Later: 'what new depth can we achieve within the framework?' Both are genuinely creative.</p>
+<span class="scholar-ref"><strong>Bring scholars together:</strong> Osborne values early work on its own terms. Boardman and Spivey recognise new imagination enabled by mastery. Jenkins shows peak technique produced peak ambition (Parthenon frieze).</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "Which example BEST supports the statement that architectural sculpture became 'less imaginative'?",
+        options: [
+          "The Parthenon frieze's unprecedented depiction of the Panathenaic procession, which broke with all previous tradition by showing contemporary civic life on a sacred building",
+          "The Olympia metopes showing Herakles ageing across the series and varying in emotional tone from violent action to tender intimacy with Athena",
+          "The repetition of the Centauromachy subject across multiple buildings (Olympia, Parthenon, Bassae), suggesting a narrowing of acceptable mythological subjects over time",
+          "The deliberate dramatic contrast between the two Olympia pediments — psychological stillness on the east, explosive violence on the west"
+        ],
+        correct: 2,
+        feedbackCorrect: "Correct — subject repetition is the strongest evidence FOR the statement. But a sophisticated response notes each treatment is compositionally distinct.",
+        feedbackWrong: "You need to argue FOR the statement as well as against it.",
+        remedial: `<p>To write a Level 5 response, argue <strong>both sides</strong> convincingly:</p>
+<span class="key-point"><strong>Subject repetition:</strong> The Centauromachy appears at:<br>
+• Olympia — west pediment (c.460 BC)<br>
+• Parthenon — south metopes (c.447–442 BC)<br>
+• Bassae — Ionic frieze (c.420–400 BC)<br><br>
+This could suggest a narrowing of acceptable subjects. Corcyra's wild mixing of stories would be unthinkable by the 5th century.</span>
+<p><strong>However:</strong> Each treatment is compositionally distinct. Same subject, different creative solutions. Is the subject choice 'unimaginative' if the treatment is original?</p>
+<span class="exam-tip"><strong>Examiner misconception (2022):</strong> 'Some candidates thought all the Parthenon metopes depicted the Centauromachy and were therefore boring.' The examiner rejects this. Repeated subjects ≠ lack of imagination if treatment is original.</span>
+<p>The other three options all argue <em>against</em> the statement — showing imagination flourishing alongside mastery.</p>`
+      },
+      {
+        type: "single",
+        tags: ["ao2"],
+        text: "A student writes: 'The Parthenon was more technically accomplished but less imaginative because it just shows fighting scenes that had been done before.' Why would this NOT score highly?",
+        options: [
+          "Because it ignores the Parthenon frieze (unprecedented subject), overlooks variety within the metopes, and fails to consider the innovative pediment compositions — it cherry-picks evidence and shows limited knowledge",
+          "Because the examiner would personally disagree with any criticism of the Parthenon, and candidates must always praise it to receive high marks",
+          "Because you should never express a clear opinion in an essay — the safest approach is always to present both sides without committing to any judgement whatsoever",
+          "Because the Parthenon is universally recognised as the greatest building ever constructed and any critical analysis of its sculptural programme is considered disrespectful by classical scholars and would therefore be penalised by examiners who share that view"
+        ],
+        correct: 0,
+        feedbackCorrect: "Exactly — this argument cherry-picks the metopes while ignoring the frieze and pediments. Level 5 requires comprehensive engagement with the evidence.",
+        feedbackWrong: "Understanding why a weak argument fails is just as important as constructing a strong one.",
+        remedial: `<p>This argument is exactly what examiner reports criticise:</p>
+<span class="key-point"><strong>It cherry-picks evidence:</strong> It focuses ONLY on the south metopes (Centauromachy) and ignores the frieze (unprecedented Panathenaic procession) and pediments (unique subjects — birth of Athena, contest with Poseidon).</span>
+<span class="key-point"><strong>It's factually incomplete:</strong> The Parthenon's programme is extraordinarily diverse: four different metope subjects, a revolutionary civic frieze, and unique pedimental subjects. Calling this 'unimaginative' shows limited knowledge.</span>
+<span class="key-point"><strong>It conflates 'repeated subject' with 'unimaginative':</strong> Even the south metopes show remarkable compositional variety — XXVI, XXVII, XXVIII all use completely different compositions.</span>
+<span class="exam-tip"><strong>Examiner insight (2022):</strong> The report explicitly flags this misconception: 'Some candidates thought all the Parthenon metopes depicted the Centauromachy and were therefore boring and not innovative.' This is a Level 2–3 argument.</span>`
+      },
+      {
+        type: "single",
+        tags: ["ao2", "scholar"],
+        text: "How should you MOST effectively use scholars in this essay?",
+        options: [
+          "Mention a single scholar only in your conclusion, since the body of the essay should contain only your own analysis without any scholarly perspective whatsoever",
+          "Weave perspectives into your argument at relevant points — Boardman on development, Spivey on psychological depth, Jenkins on the Parthenon frieze, Osborne on archaic aesthetics",
+          "List every scholar you can remember in your introduction as a comprehensive bibliography, demonstrating the breadth of your reading before you begin the actual argument",
+          "Quote Woodford's 'decorative delight' in every paragraph, since examiners specifically reward candidates who use the same scholarly quotation as a recurring motif throughout their response"
+        ],
+        correct: 1,
+        feedbackCorrect: "Perfect — scholars should be integrated throughout your argument, each serving a specific analytical purpose at the point where they're most relevant.",
+        feedbackWrong: "Effective use of scholars pushes responses from Level 4 into Level 5.",
+        remedial: `<p>The <strong>2024 mark scheme</strong>: <em>'if two or more scholars are cited the response will receive the second mark up within the level; greater engagement will elicit a higher mark.'</em></p>
+<p>You need <strong>at least two scholars</strong>, but <strong>engagement</strong> is what pushes you higher:</p>
+<span class="key-point"><strong>Boardman — use early:</strong> Frame the debate. 'Boardman's developmental view suggests technical mastery and creative ambition advanced in parallel.'</span>
+<span class="key-point"><strong>Osborne — use for 6th century:</strong> 'As Osborne argues, archaic sculpture pursued different aesthetic goals, complicating the notion that it was simply "more imaginative because less skilled."'</span>
+<span class="key-point"><strong>Spivey — use for Olympia:</strong> 'Spivey's emphasis on psychological depth demonstrates a form of imagination impossible without technical mastery.'</span>
+<span class="key-point"><strong>Jenkins — use for Parthenon frieze:</strong> 'Jenkins' argument that the Panathenaic procession represents an unprecedented fusion shows peak technique producing peak imagination.'</span>
+<span class="exam-tip"><strong>Golden rule (2023):</strong> 'Close reference to scholars' views is sufficient.' Don't memorise quotes — understand perspectives.</span>`
+      }
+    ]
+  }
+];
+
+// ===== APP STATE =====
+let currentSection = 0;
+let answers = {};
+let answerResults = {};
+let totalCorrect = 0;
+let totalAnswered = 0;
+let totalQuestions = 0;
+let sectionScores = {};
+
+QUIZ_DATA.forEach((s, si) => {
+  totalQuestions += s.questions.length;
+  sectionScores[si] = { correct: 0, total: s.questions.length };
+});
+
+// ===== RENDER =====
+function renderSectionPills() {
+  const container = document.getElementById('sectionPills');
+  container.innerHTML = QUIZ_DATA.map((s, i) => {
+    const answered = Object.keys(answers).filter(k => k.startsWith(i + '-')).length;
+    const completed = answered === s.questions.length;
+    const cls = i === currentSection ? 'active' : completed ? 'completed' : '';
+    const shortName = s.section.split('—')[0].split(':')[0].trim();
+    return `<span class="section-pill ${cls}" onclick="goToSection(${i})">${i + 1}. ${shortName}</span>`;
+  }).join('');
+}
+
+function renderSection() {
+  const section = QUIZ_DATA[currentSection];
+  const container = document.getElementById('quizContainer');
+  
+  let html = `<div class="section active">
+    <div class="section-header">
+      <div class="section-number">Section ${currentSection + 1} of ${QUIZ_DATA.length}</div>
+      <div class="section-title">${section.section}</div>
+      <div class="section-desc">${section.sectionDesc}</div>
+    </div>`;
+
+  section.questions.forEach((q, qi) => {
+    const qKey = `${currentSection}-${qi}`;
+    const answered = answers[qKey] !== undefined;
+    const result = answerResults[qKey];
+    
+    html += `<div class="question-card" id="qcard-${qKey}">
+      <div class="q-number">Q${qi + 1}</div>
+      <div class="q-tags">${q.tags.map(t => {
+        const labels = { ao1: 'AO1', ao2: 'AO2', examiner: 'Examiner Insight', scholar: 'Scholar' };
+        return `<span class="tag ${t}">${labels[t]}</span>`;
+      }).join('')}</div>
+      <div class="q-text">${q.text}</div>`;
+
+    if (q.type === 'single') {
+      html += `<div class="options">`;
+      q.options.forEach((opt, oi) => {
+        const letters = 'ABCDEFGH';
+        let cls = '';
+        if (answered) {
+          cls = 'disabled';
+          if (oi === q.correct) cls += ' correct-answer';
+          else if (answers[qKey] === oi) cls += ' wrong-answer';
+        }
+        html += `<button class="option-btn ${cls}" onclick="answerSingle('${qKey}', ${qi}, ${oi})" ${answered ? 'disabled' : ''}>
+          <span class="option-letter">${letters[oi]}</span>
+          <span>${opt}</span>
+        </button>`;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div class="checkbox-options" id="multi-${qKey}">`;
+      q.options.forEach((opt, oi) => {
+        let cls = '';
+        if (answered) {
+          cls = 'disabled';
+          const isCorrect = q.correct.includes(oi);
+          const wasSelected = answers[qKey].includes(oi);
+          if (isCorrect) cls += ' reveal-correct';
+          else if (wasSelected && !isCorrect) cls += ' reveal-wrong';
+        }
+        html += `<button class="checkbox-btn ${cls}" onclick="toggleMulti('${qKey}', ${oi})" id="cb-${qKey}-${oi}" ${answered ? 'disabled' : ''}>
+          <span class="check-box"></span>
+          <span>${opt}</span>
+        </button>`;
+      });
+      html += `</div>`;
+      if (!answered) {
+        html += `<button class="submit-multi-btn" onclick="submitMulti('${qKey}', ${qi})">Check Answer</button>`;
+      }
+    }
+
+    html += `<div class="feedback-block ${answered ? 'show' : ''}" id="fb-${qKey}">`;
+    if (answered) {
+      if (result === 'correct') {
+        html += `<div class="feedback-correct-box"><div class="feedback-title correct-title">✓ Correct</div>${q.feedbackCorrect}</div>`;
+      } else if (result === 'partial') {
+        html += `<div class="feedback-partial-box"><div class="feedback-title partial-title">◐ Partially Correct</div>${q.feedbackWrong}</div>
+        <div class="remedial-box"><div class="remedial-header">Revision Notes — Read Carefully</div>${q.remedial}</div>`;
+      } else {
+        html += `<div class="feedback-incorrect-box"><div class="feedback-title incorrect-title">✗ Not Quite</div>${q.feedbackWrong}</div>
+        <div class="remedial-box"><div class="remedial-header">Revision Notes — Read Carefully</div>${q.remedial}</div>`;
+      }
+    }
+    html += `</div></div>`;
+  });
+
+  html += `<div class="nav-buttons">
+    <button class="nav-btn prev" onclick="prevSection()" ${currentSection === 0 ? 'disabled' : ''}>← Previous</button>
+    <button class="nav-btn next" onclick="nextSection()">${currentSection === QUIZ_DATA.length - 1 ? 'See Results →' : 'Next Section →'}</button>
+  </div></div>`;
+
+  container.innerHTML = html;
+  renderSectionPills();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function answerSingle(qKey, qi, selected) {
+  if (answers[qKey] !== undefined) return;
+  const [si] = qKey.split('-').map(Number);
+  const q = QUIZ_DATA[si].questions[qi];
+  answers[qKey] = selected;
+  totalAnswered++;
+  if (selected === q.correct) { totalCorrect++; sectionScores[si].correct++; answerResults[qKey] = 'correct'; }
+  else { answerResults[qKey] = 'incorrect'; }
+  renderSection();
+  setTimeout(() => { document.getElementById(`fb-${qKey}`).scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 150);
+}
+
+let multiSelections = {};
+
+function toggleMulti(qKey, idx) {
+  if (answers[qKey] !== undefined) return;
+  if (!multiSelections[qKey]) multiSelections[qKey] = [];
+  const arr = multiSelections[qKey];
+  const pos = arr.indexOf(idx);
+  if (pos > -1) arr.splice(pos, 1); else arr.push(idx);
+  document.getElementById(`cb-${qKey}-${idx}`).classList.toggle('selected');
+}
+
+function submitMulti(qKey, qi) {
+  if (answers[qKey] !== undefined) return;
+  const selected = multiSelections[qKey] || [];
+  if (selected.length === 0) return;
+  const [si] = qKey.split('-').map(Number);
+  const q = QUIZ_DATA[si].questions[qi];
+  answers[qKey] = [...selected];
+  totalAnswered++;
+  const allCorrect = q.correct.every(c => selected.includes(c)) && selected.every(s => q.correct.includes(s));
+  const someCorrect = selected.some(s => q.correct.includes(s));
+  if (allCorrect) { totalCorrect++; sectionScores[si].correct++; answerResults[qKey] = 'correct'; }
+  else if (someCorrect) { answerResults[qKey] = 'partial'; }
+  else { answerResults[qKey] = 'incorrect'; }
+  renderSection();
+  setTimeout(() => { document.getElementById(`fb-${qKey}`).scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 150);
+}
+
+function nextSection() {
+  if (currentSection < QUIZ_DATA.length - 1) { currentSection++; renderSection(); }
+  else { showResults(); }
+}
+
+function prevSection() { if (currentSection > 0) { currentSection--; renderSection(); } }
+function goToSection(idx) { currentSection = idx; renderSection(); }
+
+function updateProgress() {
+  const pct = totalQuestions > 0 ? (totalAnswered / totalQuestions * 100) : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('scoreDisplay').textContent = `${totalCorrect} / ${totalAnswered}`;
+}
+
+function showResults() {
+  document.getElementById('quizContainer').innerHTML = '';
+  const screen = document.getElementById('resultsScreen');
+  screen.classList.add('active');
+  const pct = totalQuestions > 0 ? Math.round(totalCorrect / totalQuestions * 100) : 0;
+  document.getElementById('finalScoreText').textContent = pct + '%';
+  const circumference = 2 * Math.PI * 70;
+  const offset = circumference - (pct / 100) * circumference;
+  setTimeout(() => { document.getElementById('scoreCircle').style.strokeDashoffset = offset; }, 100);
+  let title, subtitle;
+  if (pct >= 85) { title = 'Outstanding — Level 5 Material'; subtitle = 'You have the knowledge and analytical skills to write a top-band response. Focus on weaving these insights into a sustained argument under timed conditions.'; }
+  else if (pct >= 65) { title = 'Strong Foundation — Level 4 Potential'; subtitle = 'You know the material well. To push into Level 5, revisit the remedial notes on questions you got wrong — they contain the detail and analytical frameworks you need.'; }
+  else if (pct >= 45) { title = 'Building Knowledge — Level 3'; subtitle = 'Go back through each section and carefully read the remedial notes on every question you got wrong. These contain the specific AO1 knowledge and AO2 skills you need.'; }
+  else { title = 'More Revision Needed — Level 2'; subtitle = 'The remedial notes are essentially a complete revision guide. Work through them systematically, then retake the quiz.'; }
+  document.getElementById('resultsTitle').textContent = title;
+  document.getElementById('resultsSubtitle').textContent = subtitle;
+  document.getElementById('sectionResults').innerHTML = QUIZ_DATA.map((s, i) => {
+    const sc = sectionScores[i];
+    return `<div class="section-result-row"><span class="section-result-name">${s.section.split('—')[0].split(':')[0].trim()}</span><span class="section-result-score">${sc.correct} / ${sc.total}</span></div>`;
+  }).join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  currentSection = 0; answers = {}; answerResults = {}; multiSelections = {};
+  totalCorrect = 0; totalAnswered = 0;
+  QUIZ_DATA.forEach((s, si) => { sectionScores[si] = { correct: 0, total: s.questions.length }; });
+  document.getElementById('resultsScreen').classList.remove('active');
+  renderSection();
+}
+
+renderSection();
+</script>
+</body>
+</html>
